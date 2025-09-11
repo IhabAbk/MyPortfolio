@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Phone, Copy, Check } from "lucide-react";
+import type { LucideIcon } from "lucide-react"; // ✅ Import proper type
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -15,7 +16,6 @@ export default function Contact() {
       classes:
         "bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg shadow-cyan-800/40",
     },
-   
     {
       key: "linkedin",
       href: "https://www.linkedin.com/in/ihab-abou-khzam-7bb85436a/",
@@ -32,7 +32,7 @@ export default function Contact() {
       classes:
         "bg-gradient-to-r from-gray-700 to-gray-900 shadow-lg shadow-black/50",
     },
-     {
+    {
       key: "phone",
       href: "tel:+96171420209",
       label: "+961 71 420 209",
@@ -42,7 +42,8 @@ export default function Contact() {
     },
   ];
 
-  const IconWrap = ({ Icon }: { Icon: any }) => <Icon size={20} />;
+  // ✅ Correct TypeScript type
+  const IconWrap = ({ Icon }: { Icon: LucideIcon }) => <Icon size={20} />;
 
   return (
     <motion.section
@@ -88,12 +89,10 @@ export default function Contact() {
           >
             <IconWrap Icon={item.icon} />
             {item.label}
-            {/* subtle glow on hover */}
             <span className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 blur-md" />
           </motion.a>
         ))}
 
-        {/* Copy-to-clipboard button for phone (extra interaction) */}
         <motion.button
           aria-label="Copy phone number"
           onClick={async () => {
