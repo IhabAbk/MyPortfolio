@@ -33,9 +33,9 @@ export default function Skills() {
     {
       category: "High Level Languages",
       skills: [
-        { name: "Java", level: 75 },
-        { name: "C++", level: 70 },
-        { name: "Python", level: 80 },
+        { name: "Java", level: 70 },
+        { name: "C++", level: 50 },
+        { name: "Python", level: 65 },
       ],
     },
     {
