@@ -24,6 +24,24 @@ export default function Projects() {
         "A delivery mobile application that allows users to order products from local Businesses.",
       tech: ["ReactNative", "Bootstrap", "Node.js", "React.js", "PostgreSQL", "Node.js", "WebSocket","Firebase","API Integration"],
     },
+     {
+      title: "Barber Booking System",
+      description:
+        "A web-based application that allows users to book appointments with barbers.",
+      tech: ["React.js", "JavaScript", "Php", "MySQL", "Tailwind CSS", "API Integration" ],
+    },
+     {
+      title: "Bar Menu Ordering System",
+      description:
+        "A web-based application that allows users to order food and drinks from a bar's menu.",
+      tech: ["Html5", "JavaScript", "Php", "MySQL", "SCSS", "Bootstrap", ],
+    },
+    {
+      title: "Much more projects...",
+      description:
+        "A collection of various web-based applications showcasing different functionalities and technologies.",
+      tech: ["I have used various technologies and frameworks to create these applications. ", ],
+    },
   ];
 
   return (
