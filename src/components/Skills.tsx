@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 type Skill = { name: string; level: number };
@@ -74,9 +74,27 @@ export default function Skills() {
 }
 
 function FlipCard({ category }: { category: Category }) {
+  const [flipped, setFlipped] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const handleClick = () => {
+    if (isMobile) setFlipped((prev) => !prev);
+  };
+
   return (
-    <div className="w-full h-[32rem] perspective">
-      <div className="relative w-full h-full transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
+    <div className="w-full h-[32rem] perspective" onClick={handleClick}>
+      <div
+        className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${
+          isMobile ? (flipped ? "rotate-y-180" : "") : "hover:rotate-y-180"
+        }`}
+      >
         {/* FRONT */}
         <div
           className="absolute inset-0 bg-gray-900 rounded-xl p-6 shadow-lg border border-white/20 flex items-center justify-center"
