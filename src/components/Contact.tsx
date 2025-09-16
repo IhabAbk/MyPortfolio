@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Phone, Copy, Check } from "lucide-react";
-import type { LucideIcon } from "lucide-react"; // ✅ Import proper type
+import type { LucideIcon } from "lucide-react";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -42,13 +42,12 @@ export default function Contact() {
     },
   ];
 
-  // ✅ Correct TypeScript type
   const IconWrap = ({ Icon }: { Icon: LucideIcon }) => <Icon size={20} />;
 
   return (
     <motion.section
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-800 text-white py-24 px-8"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-800 text-white py-24 px-4 sm:px-8"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -64,7 +63,7 @@ export default function Contact() {
       </motion.h2>
 
       <motion.p
-        className="mb-12 text-center text-gray-300 max-w-2xl"
+        className="mb-12 text-center text-gray-300 max-w-md sm:max-w-2xl"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.25, duration: 0.6 }}
@@ -72,24 +71,24 @@ export default function Contact() {
         Let’s connect! Reach out by email, phone, or through my social profiles.
       </motion.p>
 
-      <div className="flex flex-wrap justify-center gap-6">
+      {/* Responsive buttons */}
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-6 w-full max-w-xl">
         {items.map((item, i) => (
           <motion.a
             key={item.key}
             href={item.href}
             target={item.key === "linkedin" || item.key === "github" ? "_blank" : undefined}
             rel={item.key === "linkedin" || item.key === "github" ? "noopener noreferrer" : undefined}
-            className={`group flex items-center gap-2 px-6 py-3 rounded-xl ${item.classes} 
-                        transition will-change-transform focus:outline-none focus:ring-2 focus:ring-white/40`}
+            className={`relative flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-xl ${item.classes} 
+                        transition transform will-change-transform focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto text-center`}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: "easeOut", delay: 0.12 * i }}
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.97 }}
           >
             <IconWrap Icon={item.icon} />
             {item.label}
-            <span className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 blur-md" />
           </motion.a>
         ))}
 
@@ -102,14 +101,12 @@ export default function Contact() {
               setTimeout(() => setCopied(false), 1500);
             } catch {}
           }}
-          className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 
-                     shadow-lg shadow-emerald-800/40 transition will-change-transform
-                     hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40"
+          className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-800/40 transition transform will-change-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto justify-center text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut", delay: 0.12 * items.length }}
-          whileHover={{ scale: 1.06, y: -2 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.97 }}
         >
           {copied ? <Check size={20} /> : <Copy size={20} />}
           {copied ? "Copied!" : "Copy Number"}
