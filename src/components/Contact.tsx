@@ -1,12 +1,9 @@
 "use client";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Phone, Copy, Check } from "lucide-react";
+import { Mail, Linkedin, Github, Phone } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
-
   const items = [
     {
       key: "email",
@@ -77,8 +74,14 @@ export default function Contact() {
           <motion.a
             key={item.key}
             href={item.href}
-            target={item.key === "linkedin" || item.key === "github" ? "_blank" : undefined}
-            rel={item.key === "linkedin" || item.key === "github" ? "noopener noreferrer" : undefined}
+            target={
+              item.key === "linkedin" || item.key === "github" ? "_blank" : undefined
+            }
+            rel={
+              item.key === "linkedin" || item.key === "github"
+                ? "noopener noreferrer"
+                : undefined
+            }
             className={`relative flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-xl ${item.classes} 
                         transition transform will-change-transform focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto text-center`}
             initial={{ opacity: 0, y: 30 }}
@@ -92,24 +95,19 @@ export default function Contact() {
           </motion.a>
         ))}
 
+        {/* WhatsApp Button */}
         <motion.button
-          aria-label="Copy phone number"
-          onClick={async () => {
-            try {
-              await navigator.clipboard.writeText("+96171420209");
-              setCopied(true);
-              setTimeout(() => setCopied(false), 1500);
-            } catch {}
-          }}
-          className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-800/40 transition transform will-change-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto justify-center text-center"
+          aria-label="Chat on WhatsApp"
+          onClick={() => window.open("https://wa.me/96171420209", "_blank")}
+          className="flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 shadow-lg shadow-emerald-800/40 transition transform will-change-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto justify-center text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut", delay: 0.12 * items.length }}
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.97 }}
         >
-          {copied ? <Check size={20} /> : <Copy size={20} />}
-          {copied ? "Copied!" : "Copy Number"}
+          <Phone size={20} />
+          Chat on WhatsApp
         </motion.button>
       </div>
     </motion.section>
